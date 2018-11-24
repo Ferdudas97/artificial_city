@@ -1,6 +1,6 @@
 package com.miss.artificial_city.model.node;
 
-import jdk.nashorn.internal.runtime.regexp.joni.constants.NodeType;
+import com.miss.artificial_city.model.car.CarId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,10 +13,10 @@ import java.util.UUID;
 @Setter
 public class Node {
     private NodeType type;
-    private String id;
     private Boolean isTaken;
     private Neighbors neighbors;
     private Double maxSpeedAllowed;
+    private CarId carId;
 
 
 }
