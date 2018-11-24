@@ -32,6 +32,7 @@ public class Car {
         if (shouldChange) {
           getTheLongestDistance();
         }
+        return true;
     }
 
 
