@@ -1,12 +1,9 @@
 package com.miss.artificial_city.model.node;
 
 import jdk.nashorn.internal.runtime.regexp.joni.constants.NodeType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
 
 
 @Getter
