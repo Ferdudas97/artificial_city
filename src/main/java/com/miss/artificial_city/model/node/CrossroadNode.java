@@ -14,10 +14,6 @@ public class CrossroadNode extends Node {
     Node top;
     Node bottom;
 
-
-    private Neighbors neighborsCopy= this.getNeighbors();
-
-
     private void connectRight() {
         this.getNeighbors().setRight(this.right);
         this.right.getNeighbors().setLeft(this.left);
