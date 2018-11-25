@@ -20,9 +20,11 @@ public class Car {
     private Node head;
     private int size;
     private CarId id;
+    private final Function<Double,Double> accelerationFunction;
 
-    public Car() {
-        id = CarId.of(UUID.randomUUID().toString());
+    public Car(final Function<Double,Double> accelerationFunction) {
+        this.id = CarId.of(UUID.randomUUID().toString());
+        this.accelerationFunction = accelerationFunction;
     }
 
     public void move() {
@@ -155,7 +157,7 @@ public class Car {
     }
 
     private Double acceleratedSpeed() {
-        return Math.min(maxSpeed, currentSpeed + acceleration);
+        return Math.min(maxSpeed, currentSpeed + accelerationFunction.apply(currentSpeed));
     }
 
     private Double brakeSpeed(int dist) {
