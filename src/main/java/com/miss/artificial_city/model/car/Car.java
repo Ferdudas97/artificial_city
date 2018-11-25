@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 @AllArgsConstructor(staticName = "of")
 @Getter
 public class Car {
-    private Double acceleration;
     private Double currentSpeed;
     private Double maxSpeed;
     private Node head;
