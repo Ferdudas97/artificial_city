@@ -1,9 +1,7 @@
 package com.miss.artificial_city.model.node;
 
 import com.miss.artificial_city.model.car.CarId;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 

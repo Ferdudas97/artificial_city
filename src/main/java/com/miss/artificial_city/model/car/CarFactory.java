@@ -5,7 +5,6 @@ import com.miss.artificial_city.model.node.Node;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class CarFactory {
 

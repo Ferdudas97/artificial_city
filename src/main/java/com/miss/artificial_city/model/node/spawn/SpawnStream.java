@@ -15,14 +15,17 @@ import java.util.stream.Stream;
 public class SpawnStream {
     private final SpawnStreamId id;
     private final List<SpawnCarNode> nodes;
-
-    public Stream<Car> spawnCars(int howmany) {
+    public Car spawnCar() {
         return nodes.stream().filter(node -> !node.getIsTaken())
                 .collect(Collectors.collectingAndThen(Collectors.toList(), collected -> {
                     Collections.shuffle(collected);
                     return collected.stream();
                 }))
-                .limit(howmany)
-                .map(SpawnCarNode::spawnCar);
+                .limit(1)
+                .map(SpawnCarNode::spawnCar)
+                .findFirst()
+                .orElse(null);
     }
+
+
 }
