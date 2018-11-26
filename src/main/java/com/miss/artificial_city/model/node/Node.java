@@ -6,13 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
 
 
 @Getter
 @Setter
 public class Node {
     private NodeType type;
+    private String id;
     private Boolean isTaken;
     private Neighbors neighbors;
     private Double maxSpeedAllowed;
