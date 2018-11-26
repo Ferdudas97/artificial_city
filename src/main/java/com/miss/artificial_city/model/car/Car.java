@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.val;
 
+import javax.validation.constraints.Max;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -19,11 +20,14 @@ public class Car {
     private Node head;
     private int size;
     private CarId id;
-    private final Function<Double,Double> accelerationFunction;
+    private final Function<Double, Double> accelerationFunction;
 
-    public Car(final Function<Double,Double> accelerationFunction) {
+    public Car(final Node head, final int size, final Double maxSpeed) {
         this.id = CarId.of(UUID.randomUUID().toString());
-        this.accelerationFunction = accelerationFunction;
+        this.accelerationFunction = speed -> Math.cos(speed + 1);
+        this.head=head;
+        this.size =size;
+        this.maxSpeed = maxSpeed;
     }
 
     public void move() {
@@ -68,6 +72,7 @@ public class Car {
             node = node.getNeighbors().getRight();
         }
     }
+
     private void removePresenceFromPreviousNodes(Node node) {
         for (int i = 0; i < size; i++) {
             node.setIsTaken(false);
