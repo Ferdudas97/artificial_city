@@ -1,5 +1,8 @@
 package com.miss.artificial_city.application;
 
+import com.miss.artificial_city.dto.SaveBoardRequest;
+import com.miss.artificial_city.infastructure.repository.BoardRepository;
+import com.miss.artificial_city.infastructure.repository.NodeRepository;
 import com.miss.artificial_city.model.car.Car;
 import com.miss.artificial_city.model.car.CarHolder;
 import com.miss.artificial_city.model.node.spawn.CarSpawner;
@@ -21,6 +24,8 @@ public class SimulationServiceImpl implements SimulationService {
     private SimulationInfo simulationInfo = new SimulationInfo();
     private List<Disposable> spawnDisposables;
     private List<Disposable> traffigLightsDisposables;
+    private NodeRepository nodeRepository;
+    private BoardRepository boardRepository;
 
     @Override
     public void startSimulation() {
@@ -65,6 +70,17 @@ public class SimulationServiceImpl implements SimulationService {
     public void stopSimulation() {
         isSimulating = false;
     }
+
+    @Override
+    public SaveBoardRequest openSimulationBoard() {
+        return null;
+    }
+
+    @Override
+    public void saveSimulationBoard(SaveBoardRequest request) {
+        //this.boardRepository.save(request)
+    }
+
 
     private void spawnCars(final SpawnStreamId id) {
         val car = CarSpawner.spawnCar(id);
