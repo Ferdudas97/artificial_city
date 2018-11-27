@@ -19,7 +19,8 @@ import java.util.stream.Collectors;
 public class SimulationServiceImpl implements SimulationService {
     private boolean isSimulating;
     private SimulationInfo simulationInfo = new SimulationInfo();
-    private List<Disposable> disposables;
+    private List<Disposable> spawnDisposables;
+    private List<Disposable> traffigLightsDisposables;
 
     @Override
     public void startSimulation() {
@@ -33,7 +34,9 @@ public class SimulationServiceImpl implements SimulationService {
     }
 
     @Override
-    public void changeSimulationInfo(SimulationInfo simulationInfo) {
+    public void changeSimulationInfo(final SimulationInfo simulationInfo) {
+        this.simulationInfo = simulationInfo;
+        setSpawnStreams();
     }
 
     public static void main(String[] arg) {
@@ -44,8 +47,8 @@ public class SimulationServiceImpl implements SimulationService {
         mapToObesrvable = entry -> Observable.interval(entry.getValue() / 60 / simulationInfo.getSimulationSpeed(),
                 TimeUnit.SECONDS);
         // mały potworek XD aby  tworzyc samochód, i dodawać go do holdera
-        if (disposables!=null) disposables.forEach(Disposable::dispose);
-        this.disposables = simulationInfo.getStreamProduction().entrySet()
+        if (spawnDisposables!=null) spawnDisposables.forEach(Disposable::dispose);
+        this.spawnDisposables = simulationInfo.getStreamProduction().entrySet()
                 .stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, mapToObesrvable))
                 .entrySet()

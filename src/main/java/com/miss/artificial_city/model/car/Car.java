@@ -27,6 +27,7 @@ public class Car {
         this.head=head;
         this.size =size;
         this.maxSpeed = maxSpeed;
+
     }
 
     public void move() {
