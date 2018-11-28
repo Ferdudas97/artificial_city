@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 
@@ -68,7 +67,9 @@ public class SimulationServiceImpl implements SimulationService {
 
     @Override
     public void stopSimulation() {
+
         isSimulating = false;
+        spawnDisposables.forEach(Disposable::dispose);
     }
 
     @Override

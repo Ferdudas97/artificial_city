@@ -1,7 +1,10 @@
 package com.miss.artificial_city.infastructure.db.entities;
 
 import com.miss.artificial_city.model.node.NodeType;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -9,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
 public class NodeEntity {
 
     @Id
@@ -46,5 +50,17 @@ public class NodeEntity {
     @Column(name = "BOTTOM_NODE_ID")
     private String bottomNodeId;
 
-
+    public NodeEntity(String id, BoardEntity boardEntity, String nodeId, Double horizontalPosition, Double verticalPosition, NodeType nodeType, Double maxSpeedAllowed, String leftNodeId, String rightNodeId, String topNodeId, String bottomNodeId) {
+        this.id = id;
+        this.boardEntity = boardEntity;
+        this.nodeId = nodeId;
+        this.horizontalPosition = horizontalPosition;
+        this.verticalPosition = verticalPosition;
+        this.nodeType = nodeType;
+        this.maxSpeedAllowed = maxSpeedAllowed;
+        this.leftNodeId = leftNodeId;
+        this.rightNodeId = rightNodeId;
+        this.topNodeId = topNodeId;
+        this.bottomNodeId = bottomNodeId;
+    }
 }
