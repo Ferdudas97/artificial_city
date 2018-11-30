@@ -3,24 +3,25 @@ package com.miss.artificial_city.infastructure.db.mappers;
 import com.miss.artificial_city.dto.NodeDto;
 import com.miss.artificial_city.infastructure.db.entities.BoardEntity;
 import com.miss.artificial_city.infastructure.db.entities.NodeEntity;
-import com.miss.artificial_city.model.node.Neighbors;
-import com.miss.artificial_city.model.node.Node;
-import com.miss.artificial_city.model.node.NodeId;
-import com.miss.artificial_city.model.node.NodePosition;
+import com.miss.artificial_city.model.node.*;
+import com.miss.artificial_city.model.node.spawn.SpawnStreamId;
 import lombok.val;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class NodeMapper {
-    public static List<Node> toDomain(final List<NodeEntity> entities) {
+    public static Set<Node> toDomain(final Set<NodeEntity> entities) {
         val mapWithNodes =
                 entities.stream().map(NodeMapper::toDomain)
                         .collect(Collectors.toMap(e -> e.getId().getId(), Function.identity()));
 
         entities.forEach(entity -> setNeighbours(entity, mapWithNodes));
-        return new ArrayList<>(mapWithNodes.values());
+        return new HashSet<>(mapWithNodes.values());
     }
 
     public static Set<NodeEntity> toEntity(final Set<NodeDto> dtos, final BoardEntity boardEntity) {
@@ -47,13 +48,14 @@ public class NodeMapper {
                 .horizontalPosition(entity.getHorizontalPosition())
                 .verticalPosition(entity.getVerticalPosition())
                 .maxSpeedAllowed(entity.getMaxSpeedAllowed())
+                .spawnStreamId(entity.getSpawnStreamId())
                 .build();
     }
 
     private static NodeEntity toEntity(final NodeDto dto, final BoardEntity board) {
         return NodeEntity.builder()
                 .id(UUID.randomUUID().toString())
-                .boardEntity(board)
+                .board(board)
                 .nodeId(dto.getNodeId())
                 .nodeType(dto.getType())
                 .verticalPosition(dto.getVerticalPosition())
@@ -63,17 +65,25 @@ public class NodeMapper {
                 .rightNodeId(dto.getRightId())
                 .topNodeId(dto.getTopId())
                 .leftNodeId(dto.getLeftId())
+                .spawnStreamId(dto.getSpawnStreamId())
                 .build();
     }
 
     private static Node toDomain(final NodeEntity entity) {
-        return Node.builder()
+        val node = Node.builder()
                 .id(NodeId.of(entity.getNodeId()))
                 .type(entity.getNodeType())
                 .maxSpeedAllowed(entity.getMaxSpeedAllowed())
                 .position(NodePosition.of(entity.getHorizontalPosition(), entity.getVerticalPosition()))
                 .build();
+        // brzydko
+        if ( NodeType.SPAWN.equals(entity.getNodeType())) {
+            SpawnCarNode spawnCarNode = (SpawnCarNode) node;
+            spawnCarNode.setSpawnStreamId(SpawnStreamId.of(entity.getSpawnStreamId()));
+        }
+        return node;
     }
+
 
     private static void setNeighbours(final NodeEntity entity, final Map<String, Node> map) {
         map.get(entity.getId())

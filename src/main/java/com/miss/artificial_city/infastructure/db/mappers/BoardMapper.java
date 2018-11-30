@@ -4,7 +4,6 @@ import com.miss.artificial_city.dto.BoardDto;
 import com.miss.artificial_city.infastructure.db.entities.BoardEntity;
 import lombok.val;
 
-
 import java.util.UUID;
 
 public class BoardMapper {

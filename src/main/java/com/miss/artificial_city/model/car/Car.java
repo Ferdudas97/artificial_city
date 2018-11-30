@@ -21,6 +21,7 @@ public class Car {
     private CarId id;
     private final Function<Double, Double> accelerationFunction;
 
+
     public Car(final Node head, final int size, final Double maxSpeed) {
         this.id = CarId.of(UUID.randomUUID().toString());
         this.accelerationFunction = speed -> Math.cos(speed + 1);

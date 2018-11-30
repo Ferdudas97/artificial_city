@@ -9,12 +9,13 @@ import lombok.Getter;
 @Builder
 @Getter
 public class NodeDto {
-    //Todo: czy nie lepiej przesylac id
     private NodeType type;
     private String leftId;
     private String rightId;
     private String topId;
     private String bottomId;
+    //todo czy to dać tu czy tworzyc nowy dto?
+    private String spawnStreamId;
     private Double maxSpeedAllowed;
     private Double verticalPosition;
     private Double horizontalPosition;

@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
@@ -14,8 +15,8 @@ import java.util.Set;
 public class BoardEntity {
 
     @Id
-    @GeneratedValue
     private String id;
+
     @Column(name = "BOARD_NAME",nullable = false)
     private String name;
 

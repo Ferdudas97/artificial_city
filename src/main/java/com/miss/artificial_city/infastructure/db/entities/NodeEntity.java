@@ -1,10 +1,7 @@
 package com.miss.artificial_city.infastructure.db.entities;
 
 import com.miss.artificial_city.model.node.NodeType;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class NodeEntity {
 
@@ -20,15 +18,18 @@ public class NodeEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "BOARD_ID")
-    private BoardEntity boardEntity;
+    private BoardEntity board;
 
     @Column(name = "NODE_ID",nullable = false)
     private String nodeId;
 
-    @Column(name = "HORIZONTAL_POSITION")
+    @Column(name = "SPAWN_STREAM_ID")
+    private String spawnStreamId;
+
+    @Column(name = "HORIZONTAL_POSITION",nullable = false)
     private Double horizontalPosition;
 
-    @Column(name = "VERTICAL_POSITION")
+    @Column(name = "VERTICAL_POSITION",nullable = false)
     private Double verticalPosition;
 
     @Enumerated(EnumType.STRING)
@@ -50,17 +51,5 @@ public class NodeEntity {
     @Column(name = "BOTTOM_NODE_ID")
     private String bottomNodeId;
 
-    public NodeEntity(String id, BoardEntity boardEntity, String nodeId, Double horizontalPosition, Double verticalPosition, NodeType nodeType, Double maxSpeedAllowed, String leftNodeId, String rightNodeId, String topNodeId, String bottomNodeId) {
-        this.id = id;
-        this.boardEntity = boardEntity;
-        this.nodeId = nodeId;
-        this.horizontalPosition = horizontalPosition;
-        this.verticalPosition = verticalPosition;
-        this.nodeType = nodeType;
-        this.maxSpeedAllowed = maxSpeedAllowed;
-        this.leftNodeId = leftNodeId;
-        this.rightNodeId = rightNodeId;
-        this.topNodeId = topNodeId;
-        this.bottomNodeId = bottomNodeId;
-    }
+
 }
