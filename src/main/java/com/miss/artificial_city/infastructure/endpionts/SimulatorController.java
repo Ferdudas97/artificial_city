@@ -9,6 +9,8 @@ import com.miss.artificial_city.dto.GetSavedBoardResponse;
 import com.miss.artificial_city.dto.SaveBoardRequest;
 import com.miss.artificial_city.model.node.spawn.SpawnStreamId;
 import lombok.val;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
@@ -33,35 +35,40 @@ public class SimulatorController {
     }
 
 
-
+    @CrossOrigin
     @PostMapping(path = "/save")
     public void saveSimulationBoard(@RequestBody SaveBoardRequest request) {
-
         creatorService.saveSimulationBoard(request);
+        Logger logger = LoggerFactory.getLogger(SimulatorController.class);
+        logger.debug("TTTTTTTTT {}", request);
+
 
     }
-
+    @CrossOrigin
     @GetMapping(path = "/open/{name}")
     public GetSavedBoardResponse openSimulationBoard(@PathVariable String name) {
         simulationService.init(name);
         return creatorService.openSimulationBoard(name);
     }
-
+    @CrossOrigin
     @GetMapping(path = "/all")
     public List<String> getAllSimulationNames() {
         return creatorService.getAllBoardNames();
     }
 
-    @PostMapping("/stop")
+    @CrossOrigin
+    @GetMapping("/stop")
     public void stopSimulating() {
         simulationService.stopSimulation();
     }
 
+    @CrossOrigin
     @GetMapping("/lol")
     public  String check(){
         return "LOL";
     }
 
+    @CrossOrigin
     @GetMapping(path = "/positions")
     public ResponseBodyEmitter getNewCarPosition() {
         ExecutorService service = Executors.newSingleThreadExecutor();
@@ -79,7 +86,7 @@ public class SimulatorController {
         });
         return emitter;
     }
-
+    @CrossOrigin
     @PostMapping("/details")
     public void setNewSimulationDetails(@RequestBody ChangeSimulationDetailsRequest request) {
         val streamProductionMap = request.getStreamProduction().entrySet().stream()
