@@ -7,17 +7,22 @@ import com.miss.artificial_city.model.node.*;
 import com.miss.artificial_city.model.node.spawn.SpawnStreamId;
 import lombok.val;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class NodeMapper {
+    private static Map<NodeType, Function<NodeEntity, Node>> specifiedMappers;
+
+    static {
+        specifiedMappers = new HashMap<>();
+        specifiedMappers.putIfAbsent(NodeType.ROAD, NodeMapper::toRoadNode);
+        specifiedMappers.putIfAbsent(NodeType.SPAWN, NodeMapper::toSpawnNode);
+    }
+
     public static Set<Node> toDomain(final Set<NodeEntity> entities) {
         val mapWithNodes =
-                entities.stream().map(NodeMapper::toDomain)
+                entities.stream().map(entity -> specifiedMappers.get(entity.getNodeType()).apply(entity))
                         .collect(Collectors.toMap(e -> e.getId().getId(), Function.identity()));
 
         entities.forEach(entity -> setNeighbours(entity, mapWithNodes));
@@ -69,24 +74,28 @@ public class NodeMapper {
                 .build();
     }
 
-    private static Node toDomain(final NodeEntity entity) {
-        val node = Node.builder()
+    private static Node toRoadNode(final NodeEntity entity) {
+        return RoadNode.builder()
                 .id(NodeId.of(entity.getNodeId()))
                 .type(entity.getNodeType())
                 .maxSpeedAllowed(entity.getMaxSpeedAllowed())
                 .position(NodePosition.of(entity.getHorizontalPosition(), entity.getVerticalPosition()))
                 .build();
-        // brzydko
-        if ( NodeType.SPAWN.equals(entity.getNodeType())) {
-            SpawnCarNode spawnCarNode = (SpawnCarNode) node;
-            spawnCarNode.setSpawnStreamId(SpawnStreamId.of(entity.getSpawnStreamId()));
-        }
-        return node;
+    }
+
+    private static Node toSpawnNode(NodeEntity entity) {
+        return SpawnCarNode.builder()
+                .id(NodeId.of(entity.getNodeId()))
+                .spawnStreamId(SpawnStreamId.of(entity.getSpawnStreamId()))
+                .type(entity.getNodeType())
+                .maxSpeedAllowed(entity.getMaxSpeedAllowed())
+                .position(NodePosition.of(entity.getHorizontalPosition(), entity.getVerticalPosition()))
+                .build();
     }
 
 
     private static void setNeighbours(final NodeEntity entity, final Map<String, Node> map) {
-        map.get(entity.getId())
+        map.get(entity.getNodeId())
                 .setNeighbors(Neighbors.of(map.get(entity.getTopNodeId()),
                         map.get(entity.getLeftNodeId()),
                         map.get(entity.getRightNodeId()),

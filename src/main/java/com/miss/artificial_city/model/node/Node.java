@@ -8,10 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor(staticName = "of")
-public class Node {
+public abstract class Node {
     @NotNull
     private NodeType type;
 
@@ -30,5 +27,19 @@ public class Node {
 
     private CarId carId;
 
-
+    public Node(@NotNull NodeType type,
+                @NotNull NodeId id,
+                @NotNull Boolean isTaken,
+                Neighbors neighbors,
+                Double maxSpeedAllowed,
+                @NotNull NodePosition position,
+                CarId carId) {
+        this.type = type;
+        this.id = id;
+        this.isTaken = isTaken;
+        this.neighbors = neighbors;
+        this.maxSpeedAllowed = maxSpeedAllowed;
+        this.position = position;
+        this.carId = carId;
+    }
 }

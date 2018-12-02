@@ -1,7 +1,10 @@
 package com.miss.artificial_city.model.node;
 
+import com.miss.artificial_city.model.car.CarId;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -11,6 +14,10 @@ public class CrossroadNode extends Node {
     Node right;
     Node top;
     Node bottom;
+
+    public CrossroadNode(@NotNull NodeType type, @NotNull NodeId id, @NotNull Boolean isTaken, Neighbors neighbors, Double maxSpeedAllowed, @NotNull NodePosition position, CarId carId) {
+        super(type, id, isTaken, neighbors, maxSpeedAllowed, position, carId);
+    }
 
     private void connectRight() {
         this.getNeighbors().setRight(this.right);
