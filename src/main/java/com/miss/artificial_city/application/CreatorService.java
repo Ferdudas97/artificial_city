@@ -9,4 +9,5 @@ public interface CreatorService {
     GetSavedBoardResponse openSimulationBoard(String id);
     void saveSimulationBoard(SaveBoardRequest request);
     List<String> getAllBoardNames();
+    void save();
 }

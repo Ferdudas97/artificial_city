@@ -1,13 +1,13 @@
 package com.miss.artificial_city.dto;
 
 import com.miss.artificial_city.model.node.NodeType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @AllArgsConstructor
 @Builder
 @Getter
+@NoArgsConstructor
+@Setter
 public class NodeDto {
     private NodeType type;
     private String leftId;

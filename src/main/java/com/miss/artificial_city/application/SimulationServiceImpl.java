@@ -87,17 +87,16 @@ public class SimulationServiceImpl implements SimulationService {
     }
 
 
-    private void  getNodes(final String name) {
-       val entities = boardDao.findByName(name).getNodeEntities();
-       val nodes = NodeMapper.toDomain(entities);
-       nodes.stream()
-               .filter(node -> NodeType.SPAWN.equals(node.getType()))
-               .forEach(node -> {
-                   val spawnNode = (SpawnCarNode) node;
-                   SpawnNodeHolder.addToSpawnStrem(spawnNode);
-               });
+    private void getNodes(final String name) {
+        val entities = boardDao.findByName(name).getNodeEntities();
+        val nodes = NodeMapper.toDomain(entities);
+        nodes.stream()
+                .filter(node -> NodeType.SPAWN.equals(node.getType()))
+                .forEach(node -> {
+                    val spawnNode = (SpawnCarNode) node;
+                    SpawnNodeHolder.addToSpawnStrem(spawnNode);
+                });
     }
-
 
 
     private void spawnCars(final SpawnStreamId id) {

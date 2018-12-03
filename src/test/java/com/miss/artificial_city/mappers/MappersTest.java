@@ -5,6 +5,7 @@ import com.miss.artificial_city.infastructure.db.entities.BoardEntity;
 import com.miss.artificial_city.infastructure.db.entities.NodeEntity;
 import com.miss.artificial_city.infastructure.db.mappers.BoardMapper;
 import com.miss.artificial_city.infastructure.db.mappers.NodeMapper;
+import com.miss.artificial_city.infastructure.db.repositories.BoardDao;
 import com.miss.artificial_city.model.node.Node;
 import com.miss.artificial_city.model.node.NodeType;
 import lombok.val;

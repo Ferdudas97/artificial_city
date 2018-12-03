@@ -4,10 +4,11 @@ import com.miss.artificial_city.model.car.Car;
 import com.miss.artificial_city.model.node.SpawnCarNode;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class SpawnNodeHolder {
-    public static Map<SpawnStreamId, SpawnStream> spawnStreams;
+    public static Map<SpawnStreamId, SpawnStream> spawnStreams  = new HashMap<>();;
 
     public static Car spawnCar(final SpawnStreamId id) {
         return spawnStreams.get(id).spawnCar();
