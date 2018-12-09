@@ -14,7 +14,9 @@ public class RoadNode extends Node {
                     Neighbors neighbors,
                     Double maxSpeedAllowed,
                     @NotNull NodePosition position,
-                    CarId carId) {
-        super(type, id, isTaken, neighbors, maxSpeedAllowed, position, carId);
+                    CarId carId,
+                    @NotNull NodeDirection direction) {
+
+        super(type, id, isTaken, neighbors, maxSpeedAllowed, position, carId, direction);
     }
 }

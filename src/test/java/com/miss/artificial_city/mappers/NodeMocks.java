@@ -2,6 +2,7 @@ package com.miss.artificial_city.mappers;
 
 import com.miss.artificial_city.infastructure.db.entities.BoardEntity;
 import com.miss.artificial_city.infastructure.db.entities.NodeEntity;
+import com.miss.artificial_city.model.node.NodeDirection;
 import com.miss.artificial_city.model.node.NodeType;
 import lombok.val;
 
@@ -27,6 +28,7 @@ public class NodeMocks {
                 .horizontalPosition(1.0)
                 .verticalPosition(2.0)
                 .board(boardEntity)
+                .direction(NodeDirection.RIGHT)
                 .build();
         val nodeEntity1 = NodeEntity.builder()
                 .nodeType(NodeType.ROAD)
@@ -39,6 +41,7 @@ public class NodeMocks {
                 .horizontalPosition(3.0)
                 .verticalPosition(4.0)
                 .board(boardEntity)
+                .direction(NodeDirection.RIGHT)
                 .build();
         val nodeEntity2 = NodeEntity.builder()
                 .nodeType(NodeType.ROAD)
@@ -51,6 +54,7 @@ public class NodeMocks {
                 .horizontalPosition(6.0)
                 .verticalPosition(4.0)
                 .board(boardEntity)
+                .direction(NodeDirection.RIGHT)
                 .build();
         val nodeEntity3 = NodeEntity.builder()
                 .nodeType(NodeType.ROAD)
@@ -63,8 +67,9 @@ public class NodeMocks {
                 .horizontalPosition(3.0)
                 .verticalPosition(4.0)
                 .board(boardEntity)
+                .direction(NodeDirection.RIGHT)
                 .build();
-        Set<NodeEntity> nodeEntities = Stream.of(nodeEntity0,nodeEntity1,nodeEntity2,nodeEntity3)
+        Set<NodeEntity> nodeEntities = Stream.of(nodeEntity0, nodeEntity1, nodeEntity2, nodeEntity3)
                 .collect(Collectors.toSet());
         boardEntity.setNodeEntities(nodeEntities);
         return boardEntity;

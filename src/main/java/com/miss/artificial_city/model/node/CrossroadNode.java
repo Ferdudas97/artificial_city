@@ -15,8 +15,15 @@ public class CrossroadNode extends Node {
     Node top;
     Node bottom;
 
-    public CrossroadNode(@NotNull NodeType type, @NotNull NodeId id, @NotNull Boolean isTaken, Neighbors neighbors, Double maxSpeedAllowed, @NotNull NodePosition position, CarId carId) {
-        super(type, id, isTaken, neighbors, maxSpeedAllowed, position, carId);
+    public CrossroadNode(@NotNull NodeType type,
+                         @NotNull NodeId id,
+                         @NotNull Boolean isTaken,
+                         Neighbors neighbors,
+                         Double maxSpeedAllowed,
+                         @NotNull NodePosition position,
+                         CarId carId,
+                         @NotNull NodeDirection direction) {
+        super(type, id, isTaken, neighbors, maxSpeedAllowed, position, carId, direction);
     }
 
     private void connectRight() {
@@ -28,6 +35,7 @@ public class CrossroadNode extends Node {
         this.getNeighbors().setRight(this.right);
         this.right.getNeighbors().setLeft(this.left);
     }
+
     private void connectTop() {
         this.getNeighbors().setTop(this.top);
         this.top.getNeighbors().setLeft(this.left);
@@ -37,6 +45,7 @@ public class CrossroadNode extends Node {
         this.getNeighbors().setTop(null);
         this.top.getNeighbors().setLeft(null);
     }
+
     private void connectBottom() {
         this.getNeighbors().setBottom(this.bottom);
         this.bottom.getNeighbors().setLeft(this.left);

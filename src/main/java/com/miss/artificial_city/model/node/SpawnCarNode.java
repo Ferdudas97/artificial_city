@@ -29,8 +29,9 @@ public class SpawnCarNode extends Node {
                         Double maxSpeedAllowed,
                         @NotNull NodePosition position,
                         CarId carId,
-                        SpawnStreamId spawnStreamId) {
-        super(type, id, isTaken, neighbors, maxSpeedAllowed, position, carId);
+                        SpawnStreamId spawnStreamId,
+                        @NotNull NodeDirection direction) {
+        super(type, id, isTaken, neighbors, maxSpeedAllowed, position, carId, direction);
         this.spawnStreamId = spawnStreamId;
     }
 }

@@ -1,5 +1,6 @@
 package com.miss.artificial_city.infastructure.db.entities;
 
+import com.miss.artificial_city.model.node.NodeDirection;
 import com.miss.artificial_city.model.node.NodeType;
 import lombok.*;
 
@@ -35,6 +36,9 @@ public class NodeEntity {
 
     @Enumerated(EnumType.STRING)
     private NodeType nodeType;
+
+    @Enumerated(EnumType.STRING)
+    private NodeDirection direction;
 
     @Column(name = "MAX_SPEED")
     private Double maxSpeedAllowed;

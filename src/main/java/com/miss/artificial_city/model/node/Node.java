@@ -16,6 +16,9 @@ public abstract class Node {
     private NodeId id;
 
     @NotNull
+    private NodeDirection direction;
+
+    @NotNull
     private Boolean isTaken;
 
     private Neighbors neighbors;
@@ -33,7 +36,8 @@ public abstract class Node {
                 Neighbors neighbors,
                 Double maxSpeedAllowed,
                 @NotNull NodePosition position,
-                CarId carId) {
+                CarId carId,
+                @NotNull NodeDirection direction) {
         this.type = type;
         this.id = id;
         this.isTaken = isTaken;
@@ -41,5 +45,6 @@ public abstract class Node {
         this.maxSpeedAllowed = maxSpeedAllowed;
         this.position = position;
         this.carId = carId;
+        this.direction = direction;
     }
 }
