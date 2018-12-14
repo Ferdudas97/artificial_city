@@ -43,7 +43,10 @@ public class CreatorServiceImpl implements CreatorService{
     @Transactional
     @Override
     public void saveSimulationBoard(SaveBoardRequest request) {
-
+        Stream.of(request)
+                .map(SaveBoardRequest::getBoardDto).
+                map(BoardMapper::toEntity)
+                .forEach(boardDao::save);
 
     }
 
@@ -52,65 +55,4 @@ public class CreatorServiceImpl implements CreatorService{
         return boardDao.getBoardNames();
     }
 
-    //TODO tylko na szybko do testów
-    @Override
-    public void save() {
-        val boardEntity = BoardEntity.builder()
-                .id("lol1")
-                .name("test")
-                .build();
-        val nodeEntity0 = NodeEntity.builder()
-                .nodeType(NodeType.SPAWN)
-                .id("SPAWN NODE 0")
-                .nodeId("0")
-                .leftNodeId(null)
-                .rightNodeId("1")
-                .topNodeId("2")
-                .bottomNodeId("3")
-                .horizontalPosition(1.0)
-                .verticalPosition(2.0)
-                .board(boardEntity)
-                .build();
-        val nodeEntity1 = NodeEntity.builder()
-                .nodeType(NodeType.ROAD)
-                .id("NODE1")
-                .nodeId("1")
-                .leftNodeId("0")
-                .rightNodeId(null)
-                .topNodeId(null)
-                .bottomNodeId(null)
-                .horizontalPosition(3.0)
-                .verticalPosition(4.0)
-                .board(boardEntity)
-                .build();
-        val nodeEntity2 = NodeEntity.builder()
-                .nodeType(NodeType.ROAD)
-                .id("NODE2")
-                .nodeId("2")
-                .leftNodeId(null)
-                .rightNodeId(null)
-                .topNodeId(null)
-                .bottomNodeId("1")
-                .horizontalPosition(6.0)
-                .verticalPosition(4.0)
-                .board(boardEntity)
-                .build();
-        val nodeEntity3 = NodeEntity.builder()
-                .nodeType(NodeType.ROAD)
-                .id("NODE3")
-                .nodeId("3")
-                .leftNodeId(null)
-                .rightNodeId(null)
-                .topNodeId("0")
-                .bottomNodeId(null)
-                .horizontalPosition(3.0)
-                .verticalPosition(4.0)
-                .board(boardEntity)
-                .build();
-        Set<NodeEntity> nodeEntities = Stream.of(nodeEntity0,nodeEntity1,nodeEntity2,nodeEntity3)
-                .collect(Collectors.toSet());
-        boardEntity.setNodeEntities(nodeEntities);
-
-        boardDao.save(boardEntity);
-    }
 }

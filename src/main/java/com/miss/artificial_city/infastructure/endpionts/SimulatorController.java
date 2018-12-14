@@ -53,14 +53,8 @@ public class SimulatorController {
     @CrossOrigin
     @GetMapping(path = "/all")
     public List<String> getAllSimulationNames() {
-        creatorService.save();
         return creatorService.getAllBoardNames();
 
-    }
-    @CrossOrigin
-    @GetMapping(path = "/insert")
-    public void insert() {
-        creatorService.save();
     }
 
     @CrossOrigin
