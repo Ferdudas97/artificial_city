@@ -58,7 +58,7 @@ public class NodeMapper {
 
     private static NodeDto toDto(final NodeEntity entity) {
         return NodeDto.builder()
-                .type(entity.getNodeType())
+                .nodeType(entity.getNodeType())
                 .nodeId(entity.getNodeId())
                 .bottomId(entity.getBottomNodeId())
                 .leftId(entity.getLeftNodeId())
@@ -77,7 +77,7 @@ public class NodeMapper {
                 .id(UUID.randomUUID().toString())
                 .board(board)
                 .nodeId(dto.getNodeId())
-                .nodeType(dto.getType())
+                .nodeType(dto.getNodeType())
                 .verticalPosition(dto.getVerticalPosition())
                 .horizontalPosition(dto.getHorizontalPosition())
                 .maxSpeedAllowed(dto.getMaxSpeedAllowed())

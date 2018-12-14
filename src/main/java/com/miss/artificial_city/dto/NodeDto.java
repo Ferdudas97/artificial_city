@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 public class NodeDto {
-    private NodeType type;
+    private NodeType nodeType;
     private NodeDirection direction;
     private String leftId;
     private String rightId;

@@ -18,7 +18,7 @@ public class BoardEntity {
     @Id
     private String id;
 
-    @Column(name = "BOARD_NAME",nullable = false)
+    @Column(name = "BOARD_NAME",nullable = false, unique = true)
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "board")
