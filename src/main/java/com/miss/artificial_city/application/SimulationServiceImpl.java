@@ -82,13 +82,13 @@ public class SimulationServiceImpl implements SimulationService {
     }
 
     @Override
-    public void init(String name) {
+    public void init(String name){
+        clearCache();
         getNodes(name);
     }
 
 
     private void getNodes(final String name) {
-        val test = boardDao.findAll();
         val entities = boardDao.findByName("text1").getNodeEntities();
         val nodes = NodeMapper.toDomain(entities);
         nodes.stream()
@@ -121,17 +121,27 @@ public class SimulationServiceImpl implements SimulationService {
 
     //Todo to powinno byc w klasie Car
     private NodePosition averagePosition(final Car car) {
-        Set<NodePosition> nodePositions = new HashSet<>();
+        Set<NodePosition> nodePositionSet = new HashSet<>();
         int size = car.getSize();
         Node node = car.getHead();
         for (int i = 0; i < size; i++) {
-            nodePositions.add(node.getPosition());
-            node = node.getNeighbors().getRight();
+            nodePositionSet.add(node.getPosition());
+            node = node.getNeighbors().getLeft();
         }
-        nodePositions.stream().mapToDouble(NodePosition::getHoriziontalPosition).average();
-        nodePositions.stream().mapToDouble(NodePosition::getHoriziontalPosition).average();
-        //TODO 
-        return null;
+        val horizontal = nodePositionSet.stream()
+                .mapToDouble(NodePosition::getHoriziontalPosition)
+                .average()
+                .getAsDouble();
+        val vertical = nodePositionSet.stream()
+                .mapToDouble(NodePosition::getVerticalPosition)
+                .average()
+                .getAsDouble();
+        return NodePosition.of(horizontal, vertical);
 
+    }
+
+    private void clearCache() {
+        CarHolder.clear();
+        SpawnNodeHolder.clear();
     }
 }

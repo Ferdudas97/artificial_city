@@ -21,4 +21,7 @@ public class CarHolder {
     public static Stream<Car> getAllCars(){
         return cars.values().stream();
     }
+    public static void clear() {
+        cars.clear();
+    }
 }

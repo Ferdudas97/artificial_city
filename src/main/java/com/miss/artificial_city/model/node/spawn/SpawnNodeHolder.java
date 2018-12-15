@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SpawnNodeHolder {
-    public static Map<SpawnStreamId, SpawnStream> spawnStreams  = new HashMap<>();;
+    private static Map<SpawnStreamId, SpawnStream> spawnStreams  = new HashMap<>();;
 
     public static Car spawnCar(final SpawnStreamId id) {
         return spawnStreams.get(id).spawnCar();
@@ -20,5 +20,8 @@ public class SpawnNodeHolder {
         spawnStreams.get(spawnCarNode.getSpawnStreamId())
                 .getNodes()
                 .add(spawnCarNode);
+    }
+    public static void clear() {
+        spawnStreams.clear();
     }
 }
