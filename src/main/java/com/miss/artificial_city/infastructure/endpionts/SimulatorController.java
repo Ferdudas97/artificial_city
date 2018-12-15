@@ -38,7 +38,7 @@ public class SimulatorController {
     @CrossOrigin
     @PostMapping(path = "/save")
     public void saveSimulationBoard(@RequestBody SaveBoardRequest request) {
-        request.getBoardDto().setBoardName("text1");
+        System.out.println("WYPISZ SIE");
         creatorService.saveSimulationBoard(request);
         Logger logger = LoggerFactory.getLogger(SimulatorController.class);
         logger.debug("TTTTTTTTT {}", request);
@@ -46,9 +46,13 @@ public class SimulatorController {
 
     }
     @CrossOrigin
-    @GetMapping(path = "/open/{name}")
+    @GetMapping(path = "/creator/{name}")
     public GetSavedBoardResponse openSimulationBoard(@PathVariable String name) {
-        name= "text1";
+        return creatorService.openSimulationBoard(name);
+    }
+    @CrossOrigin
+    @GetMapping(path = "/{name}")
+    public GetSavedBoardResponse openSimulation(@PathVariable String name) {
         simulationService.init(name);
         return creatorService.openSimulationBoard(name);
     }

@@ -89,7 +89,7 @@ public class SimulationServiceImpl implements SimulationService {
 
 
     private void getNodes(final String name) {
-        val entities = boardDao.findByName("text1").getNodeEntities();
+        val entities = boardDao.findByName(name).getNodeEntities();
         val nodes = NodeMapper.toDomain(entities);
         nodes.stream()
                 .filter(node -> NodeType.SPAWN.equals(node.getType()))
