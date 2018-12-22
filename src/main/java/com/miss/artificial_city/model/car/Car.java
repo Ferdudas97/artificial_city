@@ -46,7 +46,7 @@ public class Car {
     }
 
     private void moveNodes(Node node) {
-        for (int i = 0; i < currentSpeed; i++) {
+        for (int i = 0; i < currentSpeed.intValue(); i++) {
             node = node.getNeighbors().getRight();
         }
         setPresenceToNewNodes(node);

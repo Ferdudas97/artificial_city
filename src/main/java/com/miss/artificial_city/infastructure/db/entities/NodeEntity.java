@@ -7,7 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity(name = "NODE_ENTITY")
+@Entity(name = "NODE_TABLE")
 @Getter
 @Setter
 @NoArgsConstructor
