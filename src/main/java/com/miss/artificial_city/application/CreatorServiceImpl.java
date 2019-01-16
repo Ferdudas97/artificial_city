@@ -3,19 +3,13 @@ package com.miss.artificial_city.application;
 import com.miss.artificial_city.application.exceptions.BoardNotFoundException;
 import com.miss.artificial_city.dto.GetSavedBoardResponse;
 import com.miss.artificial_city.dto.SaveBoardRequest;
-import com.miss.artificial_city.infastructure.db.entities.BoardEntity;
-import com.miss.artificial_city.infastructure.db.entities.NodeEntity;
 import com.miss.artificial_city.infastructure.db.mappers.BoardMapper;
 import com.miss.artificial_city.infastructure.db.repositories.BoardDao;
-import com.miss.artificial_city.model.node.NodeType;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service

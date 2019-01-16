@@ -1,14 +1,13 @@
 package com.miss.artificial_city.dto;
 
-import com.miss.artificial_city.model.node.NodeDirection;
-import com.miss.artificial_city.model.node.NodeType;
+
 import lombok.*;
 
 @AllArgsConstructor
-@Builder
 @Getter
 @NoArgsConstructor
 @Setter
+@Builder
 public class NodeDto {
     private NodeType nodeType;
     private NodeDirection direction;
@@ -21,4 +20,5 @@ public class NodeDto {
     private Double verticalPosition;
     private Double horizontalPosition;
     private String nodeId;
+
 }

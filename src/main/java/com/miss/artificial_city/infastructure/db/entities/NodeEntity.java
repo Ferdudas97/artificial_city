@@ -1,7 +1,7 @@
 package com.miss.artificial_city.infastructure.db.entities;
 
-import com.miss.artificial_city.model.node.NodeDirection;
-import com.miss.artificial_city.model.node.NodeType;
+import com.miss.artificial_city.dto.NodeDirection;
+import com.miss.artificial_city.dto.NodeType;
 import lombok.*;
 
 import javax.persistence.*;
